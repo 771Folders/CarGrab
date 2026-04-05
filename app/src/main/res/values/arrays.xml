@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="login_items">
+        <item>Passenger</item>
+        <item>Driver</item>
+        <item>Admin</item>
+    </string-array>
+</resources>

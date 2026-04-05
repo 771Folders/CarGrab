@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="ui.fragments.AdminAccFragment"
+    android:background="#CCC">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="350dp"
+        android:layout_height="480dp"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="16dp"
+            android:gravity="">
+
+            <TextView
+                android:id="@+id/adminName"
+                style="?attr/textAppearanceTitleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xean Stephen B. Atatado " />
+
+            <TextView
+                android:id="@+id/adminEmail"
+                style="?attr/textAppearanceTitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="xeanstephen05@gmail.com" />
+
+            <TextView
+                android:id="@+id/contactNum"
+                style="?attr/textAppearanceTitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="09567164799" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginVertical="6dp"
+                android:layout_marginTop="2dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:cornerRadius="0dp"
+                android:backgroundTint="#DDD"
+                android:textAlignment="textStart"
+                android:text="Edit Account"
+                android:textColor="@color/black"
+                android:drawableRight="@drawable/ic_right_arrow"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/analyticsButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:cornerRadius="0dp"
+                android:backgroundTint="#DDD"
+                android:textAlignment="textStart"
+                android:text="Analytics"
+                android:textColor="@color/black"
+                android:drawableRight="@drawable/ic_right_arrow"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/systemButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:cornerRadius="0dp"
+                android:backgroundTint="#DDD"
+                android:textAlignment="textStart"
+                android:text="System Appearance"
+                android:textColor="@color/black"
+                android:drawableRight="@drawable/ic_right_arrow"/>
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/logoutButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom"
+                    app:cornerRadius="0dp"
+                    android:backgroundTint="#333"
+                    android:textAlignment="textStart"
+                    android:text="Logout"
+                    android:textColor="@color/white"
+                    android:drawableRight="@drawable/ic_exit"
+                    tools:ignore="RtlCompat" />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>
