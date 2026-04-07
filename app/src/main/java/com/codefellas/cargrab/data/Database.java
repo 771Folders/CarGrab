@@ -55,11 +55,23 @@ public class Database extends SQLiteOpenHelper {
                 "locationTitle TEXT NOT NULL," +
                 "location TEXT NOT NULL);";
 
+        String createBookingTable = "CREATE TABLE IF NOT EXISTS bookings (" +
+                "bookingID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "passengerID INTEGER," +
+                "driverID INTEGER," +
+                "pickupLocation TEXT," +
+                "destination TEXT," +
+                "rating FLOAT DEFAULT 0," +
+                "estimatedFare FLOAT DEFAULT 0," +
+                "FOREIGN KEY (passengerID) REFERENCES passengerID(passengers)," +
+                "FOREIGN KEY (driverID) REFERENCES driverID(drivers));";
+
         sqLiteDatabase.execSQL(createPassengerTable);
         sqLiteDatabase.execSQL(createDriverTable);
         sqLiteDatabase.execSQL(createAdminTable);
         sqLiteDatabase.execSQL(createPassengerLocationsTable);
         sqLiteDatabase.execSQL(createVehicleTable);
+        sqLiteDatabase.execSQL(createBookingTable);
     }
 
     @Override
@@ -68,6 +80,7 @@ public class Database extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS drivers");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS passengerLocations");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS admins");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS bookings");
         onCreate(sqLiteDatabase);
     }
 
@@ -211,5 +224,42 @@ public class Database extends SQLiteOpenHelper {
         values.put("status", "Rejected");
         database.update("drivers", values, "driverID = ?", new String[]{String.valueOf(driverID)});
         database.close();
+    }
+
+    public String getDriverNameByID(int driverID) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT firstName, middleName, lastName FROM drivers WHERE driverID = ?", new String[]{String.valueOf(driverID)});
+        String name = null;
+
+        if (cursor.moveToFirst()) {
+            name = cursor.getString(cursor.getColumnIndexOrThrow("firstName")) +
+                    " " + cursor.getString(cursor.getColumnIndexOrThrow("middleName")) +
+                    " " + cursor.getString(cursor.getColumnIndexOrThrow("lastName"));
+        }
+        cursor.close();
+        db.close();
+        return name;
+    }
+
+    public ArrayList<Booking> getBookingsByPassengerID(int passengerID) {
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<Booking> bookings = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT * FROM bookings WHERE passengerID = ?", new String[]{String.valueOf(passengerID)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                Booking booking = new Booking();
+                booking.setBookingID(cursor.getInt(cursor.getColumnIndexOrThrow("bookingID")));
+                booking.setPassengerID(cursor.getInt(cursor.getColumnIndexOrThrow("passengerID")));
+                booking.setDriverID(cursor.getInt(cursor.getColumnIndexOrThrow("driverID")));
+                booking.setPickupLocation(cursor.getString(cursor.getColumnIndexOrThrow("pickupLocation")));
+                booking.setDestination(cursor.getString(cursor.getColumnIndexOrThrow("destination")));
+                booking.setRating(cursor.getFloat(cursor.getColumnIndexOrThrow("rating")));
+                booking.setEstimatedFare(cursor.getFloat(cursor.getColumnIndexOrThrow("estimatedFare")));
+                bookings.add(booking);
+            } while (cursor.moveToNext());
+        }
+
+        return bookings;
     }
 }
