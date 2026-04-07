@@ -5,6 +5,7 @@ import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -14,6 +15,7 @@ import com.codefellas.cargrab.R;
 import com.codefellas.cargrab.databinding.ActivityMainBinding;
 import com.codefellas.cargrab.ui.fragments.BookingFragment;
 import com.codefellas.cargrab.ui.fragments.PassengerAccFragment;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
     }
+
 
     @Override
     protected void onDestroy() {
